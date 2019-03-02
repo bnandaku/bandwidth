@@ -1,0 +1,29 @@
+package bandwidth
+
+type call struct {
+	From string `json:"from"`
+	To string `json:"to"`
+	Callback string `json:"callbackurl"`
+}
+
+func (b* Bandwidth) CreateCall(from string, to string, callback string) error{
+	newCall := &call{
+		From:from,
+		To:to,
+		Callback:callback,
+	}
+	return b.post(newCall, "call")
+}
+
+
+type CallEvent struct {
+	EventType string `json:"eventType"`
+	From      string `json:"from"`
+	To        string `json:"to"`
+	CallID    string `json:"callId"`
+	CallURI   string `json:"callUri"`
+	CallState string `json:"callState"`
+	Time      string `json:"time"`
+}
+
+func (b* Bandwidth) Event ()

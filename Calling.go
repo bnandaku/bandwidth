@@ -1,5 +1,7 @@
 package bandwidth
 
+import "encoding/json"
+
 type call struct {
 	From string `json:"from"`
 	To string `json:"to"`
@@ -26,4 +28,21 @@ type CallEvent struct {
 	Time      string `json:"time"`
 }
 
-func (b* Bandwidth) Event ()
+func (b* Bandwidth) Event (body []byte) error {
+
+	event := &CallEvent{}
+	err := json.Unmarshal(body, event)
+
+	if err != nil {
+		return err
+	}
+	switch event.EventType {
+	case "incomingcall": b.IncomingEvent(event)
+	case "answer": b.AnswerEvent(event)
+	case "recording": b.RecordingEvent(event)
+	case "hangup": b.HangupEvent(event)
+	default: b.DefaultEvent(event)
+	}
+	return nil
+
+}

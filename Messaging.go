@@ -30,3 +30,23 @@ func (b* Bandwidth) SendMMS (from string, to string, text string, mediaURL []str
 	}
 	return b.post(mms, "messages")
 }
+
+
+type MessageEvent struct {
+	EventType           string `json:"eventType"`
+	Direction           string `json:"direction"`
+	From                string `json:"from"`
+	To                  string `json:"to"`
+	MessageID           string `json:"messageId"`
+	MessageURI          string `json:"messageUri"`
+	Text                string `json:"text"`
+	ApplicationID       string `json:"applicationId"`
+	Time                string `json:"time"`
+	State               string `json:"state"`
+	DeliveryState       string `json:"deliveryState"`
+	DeliveryCode        string `json:"deliveryCode"`
+	DeliveryDescription string `json:"deliveryDescription"`
+}
+
+type MessageCallBack func(event *MessageEvent) error
+

@@ -9,11 +9,18 @@ import (
 import b64 "encoding/base64"
 
 type Bandwidth struct {
-	UserID        string
-	Authorization string
-	Token         string
-	Secret        string
+	UserID         string
+	Authorization  string
+	Token          string
+	Secret         string
+	AnswerEvent    PhoneCallBack
+	HangupEvent    PhoneCallBack
+	IncomingEvent  PhoneCallBack
+	RecordingEvent PhoneCallBack
+	DefaultEvent   PhoneCallBack
 }
+
+type PhoneCallBack func (event *CallEvent) error
 
 func (t* Bandwidth) New (UserID string, Token string, Secret string) error{
 	t.Secret = Secret

@@ -18,7 +18,9 @@ func (b* Bandwidth) SendSMS(from string, to string, text string, callback string
 		Text:text,
 		CallbackURL:callback,
 	}
-	return b.post(sms, "messages")
+	err, _ :=  b.post(sms, "messages")
+
+	return err
 }
 
 func (b* Bandwidth) SendMMS (from string, to string, text string, mediaURL []string, callback string) error{
@@ -29,7 +31,9 @@ func (b* Bandwidth) SendMMS (from string, to string, text string, mediaURL []str
 		CallbackURL:callback,
 		Media:mediaURL,
 	}
-	return b.post(mms, "messages")
+	err , _ := b.post(mms, "messages")
+
+	return err
 }
 
 

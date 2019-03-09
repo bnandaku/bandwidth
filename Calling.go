@@ -54,8 +54,11 @@ func (b* Bandwidth) CallEvent(body []byte) error {
 
 }
 
-func (b *Bandwidth) StartRecording(callID string) error  {
-	var body = json.RawMessage(`{"recordingEnabled":"true", "recordingFileFormat": "wav"}`)
+func (b *Bandwidth) StartRecording(callID string, format string) error  {
+	var body = json.RawMessage(`{"recordingEnabled":"true", "recordingFileFormat": "mp3"}`)
+	if format == "wav"{
+		body = json.RawMessage(`{"recordingEnabled":"true", "recordingFileFormat": "wav"}`)
+	}
 	fmt.Println("Starting to record")
 	endpoint := "calls/" + callID
 	err, _ := b.post(body,endpoint )

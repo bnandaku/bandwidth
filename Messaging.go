@@ -50,9 +50,9 @@ type MessageEvent struct {
 }
 
 
-func (b* Bandwidth) MessageEvent (body *[]byte) error {
+func (b* Bandwidth) MessageEvent (body []byte) error {
 	event := &MessageEvent{}
-	err := json.Unmarshal(*body, event)
+	err := json.Unmarshal(body, event)
 
 	if err != nil {
 		return err

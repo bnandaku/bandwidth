@@ -46,3 +46,15 @@ func (b* Bandwidth) CallEvent(body []byte) error {
 	return nil
 
 }
+
+func (b *Bandwidth) StartRecording(callID string) error  {
+	var body = []byte(`{"recordingEnabled":"true"}`)
+	b.post(body, "/calls/" + callID)
+	return nil
+}
+
+func (b *Bandwidth) StopRecording(callID string) error{
+	var body = []byte(`{"recordingEnabled":"false"}`)
+	b.post(body, "/calls/" + callID)
+	return nil
+}

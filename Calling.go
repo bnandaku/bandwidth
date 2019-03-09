@@ -28,7 +28,7 @@ type CallEvent struct {
 	Time      string `json:"time"`
 }
 
-func (b* Bandwidth) Event (body []byte) error {
+func (b* Bandwidth) CallEvent(body []byte) error {
 
 	event := &CallEvent{}
 	err := json.Unmarshal(body, event)

@@ -18,9 +18,14 @@ type Bandwidth struct {
 	IncomingEvent  PhoneCallBack
 	RecordingEvent PhoneCallBack
 	DefaultEvent   PhoneCallBack
+	SMSEvent 	MessageCallBack
+	MMSEvent 	MessageCallBack
+	DefaultMessageEvent	MessageCallBack
+
 }
 
 type PhoneCallBack func (event *CallEvent) error
+type MessageCallBack func(event *MessageEvent) error
 
 func (t* Bandwidth) New (UserID string, Token string, Secret string) error{
 	t.Secret = Secret

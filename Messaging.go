@@ -1,5 +1,6 @@
 package bandwidth
 
+import "encoding/json"
 
 type message struct {
 	From        string `json:"from"`
@@ -48,5 +49,18 @@ type MessageEvent struct {
 	DeliveryDescription string `json:"deliveryDescription"`
 }
 
-type MessageCallBack func(event *MessageEvent) error
 
+func (b* Bandwidth) MessageEvent (body *[]byte) error {
+	event := &MessageEvent{}
+	err := json.Unmarshal(*body, event)
+
+	if err != nil {
+		return err
+	}
+	switch event.EventType {
+	case "sms": b.SMSEvent(event)
+	case "mms": b.MMSEvent(event)
+	default: b.DefaultMessageEvent(event)
+	}
+	return nil
+}
